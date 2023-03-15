@@ -14,23 +14,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.pjk.mapd_721_final_project.GpsTracker;
 import com.example.pjk.mapd_721_final_project.MainScreenActivity;
 import com.example.pjk.mapd_721_final_project.R;
+import com.example.pjk.mapd_721_final_project.RegisterActivity;
+import com.example.pjk.mapd_721_final_project.data.Checkin;
+import com.example.pjk.mapd_721_final_project.data.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private GpsTracker gpsTracker;
-
+    private DatabaseReference databaseReferencCheckin;
     double longitude;
     double latitude;
     String cityName;
@@ -111,5 +117,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         System.out.println("long = " + longitude + " lat = " + latitude);
         System.out.println("City Name = "  + cityName);
         System.out.println("Country Name = "  + countryName);
+
+        //databaseReferencCheckin = FirebaseDatabase.getInstance().getReference().child("user").child("checkin");
+        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user/checkin");
+        String checkinId = databaseReferencCheckin.push().getKey();
+
+        String date = "testDate";
+        String time = "testTime";
+        String sLongitude = "123";
+        String sLatitude = "421";
+        String desc = "this is my description test";
+        String remarks = "this is my remarks and its longer than my description. yes no yes yes";
+
+        Checkin checkin = new Checkin(date, time, sLongitude, sLatitude, desc, remarks);
+      //  databaseReferencCheckin.setValue(checkin);
+        databaseReferencCheckin.child(checkinId).setValue(checkin);
+        Toast.makeText(getContext(), "New Account Successfully Registered!", Toast.LENGTH_SHORT).show();
     }
 }
