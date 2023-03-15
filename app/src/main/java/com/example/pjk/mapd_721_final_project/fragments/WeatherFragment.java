@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pjk.mapd_721_final_project.GpsTracker;
 import com.example.pjk.mapd_721_final_project.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +36,8 @@ public class WeatherFragment extends Fragment {
     TextView textViewMinTemp;
     TextView textViewMaxTemp;
     TextView textViewFeelsLike;
+    ImageView imageViewWeather;
+    String currentCity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class WeatherFragment extends Fragment {
 
         Button buttonRefresh = rootView.findViewById(R.id.buttonRefreshWeather);
 
+        GpsTracker gpsTracker = new GpsTracker(this.getContext());
+        currentCity = gpsTracker.getCityName();
         buttonRefresh.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -56,13 +63,14 @@ public class WeatherFragment extends Fragment {
     public void refresh(View view)
     {
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
 
         textViewDesc = view.findViewById(R.id.textViewWeatherDesc);
         textViewCurrentTemp = view.findViewById(R.id.textViewCurrentTemp);
         textViewMinTemp = view.findViewById(R.id.textViewMinTemp);
         textViewMaxTemp = view.findViewById(R.id.textViewMaxTemp);
         textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
+        imageViewWeather = view.findViewById(R.id.imageViewWeather);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
 
 
@@ -85,6 +93,7 @@ public class WeatherFragment extends Fragment {
                     textViewMinTemp.setText(tempMin);
                     textViewMaxTemp.setText(tempMax);
                     textViewFeelsLike.setText(feelsLike);
+                    Picasso.get().load("https://openweathermap.org/img/wn/10d@4x.png").into(imageViewWeather);
 //
 //                    System.out.println("Description  = " + description);
 //                    System.out.println("current temp = " + tempCurr);

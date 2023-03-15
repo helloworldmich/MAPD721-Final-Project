@@ -12,6 +12,8 @@ import com.example.pjk.mapd_721_final_project.fragments.MeFragment;
 import com.example.pjk.mapd_721_final_project.fragments.WeatherFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -26,6 +28,11 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 

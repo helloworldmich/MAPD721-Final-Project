@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
+        Button buttonLRegister = findViewById(R.id.buttonLRegister);
 
         buttonLogin.setOnClickListener(new View.OnClickListener()
         {
@@ -24,6 +25,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainScreenActivity.class));
             }
         });
+
+        buttonLRegister.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+            }
+        });
+
 
     }
 }

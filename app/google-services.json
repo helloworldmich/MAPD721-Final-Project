@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224872432665",
+    "project_id": "mapd721-final-project",
+    "storage_bucket": "mapd721-final-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224872432665:android:e3c2aa554219a22e371688",
+        "android_client_info": {
+          "package_name": "com.example.pjk.mapd_721_final_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224872432665-sajugrphgm0joei9tnadkvf6qo4597gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGJDCX59cmUEkvwPGeKx814apUfd0mHjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224872432665-sajugrphgm0joei9tnadkvf6qo4597gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
