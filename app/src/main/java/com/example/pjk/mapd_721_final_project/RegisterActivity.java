@@ -37,12 +37,17 @@ public class RegisterActivity extends AppCompatActivity {
     private void register() {
 //        String password = editTextPassword.getText().toString().trim();
 
-        databaseReferencUser = FirebaseDatabase.getInstance().getReference().child("user").child("login");
+//        databaseReferencUser = FirebaseDatabase.getInstance().getReference().child("user").child("login");
+        databaseReferencUser = FirebaseDatabase.getInstance().getReference().child("user");
         String username = "testUserAdmin";
         String password = "thisisapassword123";
 
         User user = new User(username, password);
-        databaseReferencUser.setValue(user);
+
+//        String userID = databaseReferencUser.push().getKey();
+
+//        databaseReferencUser.setValue(user);
+        databaseReferencUser.child(username).child("login").setValue(user);
         Toast.makeText(RegisterActivity.this, "New Account Successfully Registered!", Toast.LENGTH_SHORT).show();
     }
 

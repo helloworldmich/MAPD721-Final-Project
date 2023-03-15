@@ -119,7 +119,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         System.out.println("Country Name = "  + countryName);
 
         //databaseReferencCheckin = FirebaseDatabase.getInstance().getReference().child("user").child("checkin");
-        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user/checkin");
+        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
         String checkinId = databaseReferencCheckin.push().getKey();
 
         String date = "testDate";
@@ -131,7 +131,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         Checkin checkin = new Checkin(date, time, sLongitude, sLatitude, desc, remarks);
       //  databaseReferencCheckin.setValue(checkin);
-        databaseReferencCheckin.child(checkinId).setValue(checkin);
+        databaseReferencCheckin.child("testUserAdmin").child("checkin").child(checkinId).setValue(checkin);
         Toast.makeText(getContext(), "New Account Successfully Registered!", Toast.LENGTH_SHORT).show();
     }
 }
