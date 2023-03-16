@@ -126,6 +126,68 @@ public class GpsTracker implements LocationListener {
         return null;
     }
 
+    public String getStateName() {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                String state = addresses.get(0).getAdminArea();
+                return state;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getAddressName() {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                String address = addresses.get(0).getAddressLine(0);
+                return address;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getPostalCode() {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                String postal = addresses.get(0).getPostalCode();
+                return postal;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getNearbyPlace() {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                String nearby = addresses.get(0).getFeatureName();
+//                System.out.println("featureName = " + addresses.get(0).getFeatureName());
+//                System.out.println("phone = " + addresses.get(0).getPhone());
+//                System.out.println("url = " + addresses.get(0).getUrl());
+//                System.out.println("extras = " + addresses.get(0).getExtras());
+//                System.out.println("locale = " + addresses.get(0).getLocale());
+//                System.out.println("main road = " + addresses.get(0).getThoroughfare());
+                return nearby;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public void onLocationChanged(Location location) {}
 

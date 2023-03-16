@@ -1,6 +1,8 @@
 package com.example.pjk.mapd_721_final_project.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -31,6 +33,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     SupportMapFragment mapFragment;
@@ -41,6 +47,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     double latitude;
     String cityName;
     String countryName;
+    String postalCode;
+    String addressName;
+    String stateName;
+    String nearby;
+    String username;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +60,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+
+        sharedPreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
 
         Button buttonCheckin = rootView.findViewById(R.id.buttonCheckin);
 
@@ -91,15 +106,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         longitude = gpsTracker.getLongitude();
         cityName = gpsTracker.getCityName();
         countryName = gpsTracker.getCountryName();
-
-
-//        System.out.println("long = " + longitude + " lat = " + latitude);
-//        System.out.println("City Name = "  + cityName);
-//        System.out.println("Country Name = "  + countryName);
+        postalCode = gpsTracker.getPostalCode();
+        addressName = gpsTracker.getAddressName();
+        stateName = gpsTracker.getStateName();
+        nearby = gpsTracker.getNearbyPlace();
 
         // Add a marker in Sydney and move the camera
         LatLng centennial = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(centennial).title(cityName));
+        mMap.addMarker(new MarkerOptions().position(centennial).title(addressName));
         // below line is use to add custom marker on our map.
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centennial, 15));
@@ -114,24 +128,35 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void buttonCheckinClicked()
     {
+        Calendar calendar = Calendar.getInstance();
+        Date currentTime = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(currentTime);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        String timeString = timeFormat.format(currentTime);
+
         System.out.println("long = " + longitude + " lat = " + latitude);
         System.out.println("City Name = "  + cityName);
         System.out.println("Country Name = "  + countryName);
+        System.out.println("postal = " + postalCode);
+        System.out.println("Address Name = "  + addressName);
+        System.out.println("State Name = "  + stateName);
+        System.out.println("Nearby Name = "  + nearby);
 
         //databaseReferencCheckin = FirebaseDatabase.getInstance().getReference().child("user").child("checkin");
         databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
         String checkinId = databaseReferencCheckin.push().getKey();
 
-        String date = "testDate";
-        String time = "testTime";
-        String sLongitude = "123";
-        String sLatitude = "421";
-        String desc = "this is my description test";
+        String date = dateString;
+        String time = timeString;
+        String sLongitude = String.valueOf(longitude);
+        String sLatitude = String.valueOf(latitude);
+        String desc = addressName;
         String remarks = "this is my remarks and its longer than my description. yes no yes yes";
 
         Checkin checkin = new Checkin(date, time, sLongitude, sLatitude, desc, remarks);
       //  databaseReferencCheckin.setValue(checkin);
-        databaseReferencCheckin.child("testUserAdmin").child("checkin").child(checkinId).setValue(checkin);
-        Toast.makeText(getContext(), "New Account Successfully Registered!", Toast.LENGTH_SHORT).show();
+        databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
+        Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
     }
 }

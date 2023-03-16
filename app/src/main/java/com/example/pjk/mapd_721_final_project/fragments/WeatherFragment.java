@@ -71,6 +71,8 @@ public class WeatherFragment extends Fragment {
         textViewMaxTemp = view.findViewById(R.id.textViewMaxTemp);
         textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
         imageViewWeather = view.findViewById(R.id.imageViewWeather);
+        imageViewWeather.setScaleX(3.0f);
+        imageViewWeather.setScaleY(3.0f);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
 
 
@@ -87,13 +89,14 @@ public class WeatherFragment extends Fragment {
                     JSONArray jsonArray = response.getJSONArray("weather");
                     JSONObject weatherObject = jsonArray.getJSONObject(0);
                     String description = weatherObject.getString("description");
+                    String icon = weatherObject.getString("icon");
 
                     textViewDesc.setText(description);
                     textViewCurrentTemp.setText(tempCurr);
                     textViewMinTemp.setText(tempMin);
                     textViewMaxTemp.setText(tempMax);
                     textViewFeelsLike.setText(feelsLike);
-                    Picasso.get().load("https://openweathermap.org/img/wn/10d@4x.png").into(imageViewWeather);
+                    Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@4x.png").into(imageViewWeather);
 //
 //                    System.out.println("Description  = " + description);
 //                    System.out.println("current temp = " + tempCurr);

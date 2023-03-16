@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pjk.mapd_721_final_project.data.User;
@@ -15,6 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReferencUser;
+    EditText editTextRegisterUserName;
+    EditText editTextRegisterName;
+    EditText editTextRegisterPassword1;
+    EditText editTextRegisterPassword2;
+    EditText editTextRegisterEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +42,30 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-//        String password = editTextPassword.getText().toString().trim();
 
-//        databaseReferencUser = FirebaseDatabase.getInstance().getReference().child("user").child("login");
         databaseReferencUser = FirebaseDatabase.getInstance().getReference().child("user");
-        String username = "testUserAdmin";
-        String password = "thisisapassword123";
 
-        User user = new User(username, password);
+        editTextRegisterUserName = findViewById(R.id.editTextRegisterUserName);
+        editTextRegisterName = findViewById(R.id.editTextRegisterName);
+        editTextRegisterPassword1 = findViewById(R.id.editTextRegisterPassword1);
+        editTextRegisterPassword2 = findViewById(R.id.editTextRegisterPassword2);
+        editTextRegisterEmail = findViewById(R.id.editTextRegisterEmail);
 
-//        String userID = databaseReferencUser.push().getKey();
 
-//        databaseReferencUser.setValue(user);
+        String username = editTextRegisterUserName.getText().toString().trim();
+        String password = editTextRegisterPassword1.getText().toString().trim();
+        String name = editTextRegisterName.getText().toString().trim();
+        String email = editTextRegisterEmail.getText().toString().trim();
+
+        User user = new User(username, password, name, email);
+
         databaseReferencUser.child(username).child("login").setValue(user);
         Toast.makeText(RegisterActivity.this, "New Account Successfully Registered!", Toast.LENGTH_SHORT).show();
+
+
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

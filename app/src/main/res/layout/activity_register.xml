@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".RegisterActivity">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView9"
@@ -30,7 +34,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView11"
@@ -48,7 +53,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView13"
@@ -66,7 +72,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView14"
@@ -84,7 +91,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView15"
@@ -102,7 +110,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView16"
