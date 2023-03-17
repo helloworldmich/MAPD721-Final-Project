@@ -24,6 +24,7 @@ import com.example.pjk.mapd_721_final_project.R;
 import com.example.pjk.mapd_721_final_project.RegisterActivity;
 import com.example.pjk.mapd_721_final_project.data.Checkin;
 import com.example.pjk.mapd_721_final_project.data.User;
+import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -72,6 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View v)
             {
                 buttonCheckinClicked();
+
             }
         });
 
@@ -128,6 +130,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void buttonCheckinClicked()
     {
+
+
         Calendar calendar = Calendar.getInstance();
         Date currentTime = calendar.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -135,17 +139,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String timeString = timeFormat.format(currentTime);
 
-        System.out.println("long = " + longitude + " lat = " + latitude);
-        System.out.println("City Name = "  + cityName);
-        System.out.println("Country Name = "  + countryName);
-        System.out.println("postal = " + postalCode);
-        System.out.println("Address Name = "  + addressName);
-        System.out.println("State Name = "  + stateName);
-        System.out.println("Nearby Name = "  + nearby);
 
-        //databaseReferencCheckin = FirebaseDatabase.getInstance().getReference().child("user").child("checkin");
-        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
-        String checkinId = databaseReferencCheckin.push().getKey();
+//        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
+//        String checkinId = databaseReferencCheckin.push().getKey();
 
         String date = dateString;
         String time = timeString;
@@ -153,10 +149,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         String sLatitude = String.valueOf(latitude);
         String desc = addressName;
         String remarks = "this is my remarks and its longer than my description. yes no yes yes";
+        String city = cityName;
+        String country = countryName;
 
-        Checkin checkin = new Checkin(date, time, sLongitude, sLatitude, desc, remarks);
-      //  databaseReferencCheckin.setValue(checkin);
-        databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
-        Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
+//        Checkin checkin = new Checkin(checkinId,date, time, sLongitude, sLatitude, city,country, desc, remarks);
+//        databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
+//        Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
+//
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("checkin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("longitude", sLongitude);
+        editor.putString("latitude", sLatitude);
+        editor.putString("city", city);
+        editor.putString("country", country);
+        editor.putString("address", desc);
+        editor.apply();
+
+        NewCheckin popupWindow = new NewCheckin(getContext());
+        popupWindow.show();
     }
 }

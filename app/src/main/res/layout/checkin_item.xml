@@ -17,26 +17,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewHistoryAddress"
+                android:id="@+id/textViewHistoryTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Title" />
 
             <TextView
-                android:id="@+id/textViewHistoryCountry"
+                android:id="@+id/textViewHistoryCityCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="City + country" />
 
-            <TextView
-                android:id="@+id/textViewHistoryCity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonHistoryView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -52,20 +47,40 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewHistoryTime"
+            android:id="@+id/textViewHistoryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Date" />
 
         <TextView
-            android:id="@+id/textViewHistoryDate"
+            android:id="@+id/textViewHistoryTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Time" />
+
+        <TextView
+            android:id="@+id/textViewHistoryCheckinID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewHistoryAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Complete Address" />
     </LinearLayout>
 
 </LinearLayout>

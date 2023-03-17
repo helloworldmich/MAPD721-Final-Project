@@ -1,5 +1,7 @@
 package com.example.pjk.mapd_721_final_project.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,13 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pjk.mapd_721_final_project.R;
 import com.example.pjk.mapd_721_final_project.adapter.CheckinAdapter;
 import com.example.pjk.mapd_721_final_project.data.Checkin;
+import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,17 +46,18 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
-
         checkinList = new ArrayList<>();
         recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        checkinAdapter = new CheckinAdapter(checkinList);
+        checkinAdapter = new CheckinAdapter(getActivity(), checkinList);
         recyclerView.setAdapter(checkinAdapter);
+
 
         loadHistoryCHeckin();
 
         return rootView;
     }
+
 
     private void loadHistoryCHeckin() {
 
@@ -61,19 +71,19 @@ public class HistoryFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // get the values for each checkin entry
+                    String checkinID = snapshot.getKey();
+                    String title = snapshot.child("title").getValue(String.class);
                     String desc = snapshot.child("desc").getValue(String.class);
                     String date = snapshot.child("date").getValue(String.class);
                     String time = snapshot.child("time").getValue(String.class);
                     String longitude = snapshot.child("longitude").getValue(String.class);
                     String latitude = snapshot.child("latitude").getValue(String.class);
+                    String city = snapshot.child("city").getValue(String.class);
+                    String country = snapshot.child("country").getValue(String.class);
                     String remarks = snapshot.child("remarks").getValue(String.class);
 
-
-                    // do something with the retrieved data
-                    System.out.println(desc);
-
                     // create a new Checkin object and add it to the list
-                    checkinList.add(new Checkin(date, time, longitude, latitude, desc, remarks));
+                    checkinList.add(new Checkin(checkinID, title, date, time, longitude, latitude, city, country, desc, remarks));
 
                 }
 
