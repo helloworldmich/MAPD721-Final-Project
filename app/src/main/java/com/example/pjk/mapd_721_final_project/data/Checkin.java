@@ -21,4 +21,25 @@ public class Checkin {
         this.remarks = remarks;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+    public String getDesc() {
+        return desc;
+    }
+    public String getRemarks() {
+        return remarks;
+    }
+
 }

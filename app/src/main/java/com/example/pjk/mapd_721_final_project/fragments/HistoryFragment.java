@@ -4,63 +4,90 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pjk.mapd_721_final_project.R;
+import com.example.pjk.mapd_721_final_project.adapter.CheckinAdapter;
+import com.example.pjk.mapd_721_final_project.data.Checkin;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class HistoryFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private RecyclerView recyclerView;
+    private CheckinAdapter checkinAdapter;
+    private List<Checkin> checkinList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_history, container, false);
+
+        checkinList = new ArrayList<>();
+        recyclerView = rootView.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        checkinAdapter = new CheckinAdapter(checkinList);
+        recyclerView.setAdapter(checkinAdapter);
+
+        loadHistoryCHeckin();
+
+        return rootView;
     }
+
+    private void loadHistoryCHeckin() {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child("Test").child("checkin");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                checkinList.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    // get the values for each checkin entry
+                    String desc = snapshot.child("desc").getValue(String.class);
+                    String date = snapshot.child("date").getValue(String.class);
+                    String time = snapshot.child("time").getValue(String.class);
+                    String longitude = snapshot.child("longitude").getValue(String.class);
+                    String latitude = snapshot.child("latitude").getValue(String.class);
+                    String remarks = snapshot.child("remarks").getValue(String.class);
+
+
+                    // do something with the retrieved data
+                    System.out.println(desc);
+
+                    // create a new Checkin object and add it to the list
+                    checkinList.add(new Checkin(date, time, longitude, latitude, desc, remarks));
+
+                }
+
+                // update the RecyclerView
+                checkinAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("ERRPR", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+    }
+
+
 }
