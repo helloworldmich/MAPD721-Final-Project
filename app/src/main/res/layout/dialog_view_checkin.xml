@@ -14,7 +14,9 @@
         android:layout_width="261dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:editable="false"
         android:ems="10"
+        android:enabled="false"
         android:hint="Title"
         android:inputType="textPersonName" />
 
@@ -22,6 +24,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check-in ID: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewViewCheckinID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxx" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -124,10 +144,17 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/buttonViewCheckin"
+        android:id="@+id/buttonViewCheckinOpenMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Checkin" />
+        android:text="Open Map" />
+
+    <Button
+        android:id="@+id/buttonViewCheckinDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Delete" />
 
 </LinearLayout>

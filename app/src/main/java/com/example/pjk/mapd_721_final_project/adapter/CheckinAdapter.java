@@ -4,6 +4,7 @@ import static android.app.PendingIntent.getActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,17 +61,29 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         holder.textViewHistoryDate.setText(checkin.getDate());
         holder.textViewHistoryTime.setText(checkin.getTime());
         holder.textViewHistoryCheckinID.setText(checkin.getCheckinID());
+        holder.textViewHistoryLong.setText(checkin.getLongitude());
+        holder.textViewHistoryLat.setText(checkin.getLatitude());
         holder.textViewHistoryCityCountry.setText(checkin.getCity() + ", " + checkin.getCountry());
+        holder.textViewHistoryLat.setText(checkin.getLatitude());
+        holder.textViewHistoryRemarks.setText(checkin.getRemarks());
 
         holder.buttonHistoryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String address = holder.textViewHistoryAddress.getText().toString();
-//                String checkinID = holder.textViewHistoryCheckinID.getText().toString();
-//                System.out.println(checkinID);
+                String address = holder.textViewHistoryAddress.getText().toString();
+                String checkinID = holder.textViewHistoryCheckinID.getText().toString();
+                String title = holder.textViewHistoryTitle.getText().toString();
+                String longitude = holder.textViewHistoryLong.getText().toString();
+                String latitude = holder.textViewHistoryLat.getText().toString();
+                String cityCountry = holder.textViewHistoryCityCountry.getText().toString();
+                String[] parts = cityCountry.split(", ");
+                String city = parts[0].trim();
+                String country = parts[1].trim();
+                String remarks = holder.textViewHistoryRemarks.getText().toString();
 
-                ViewCheckin popupWindow = new ViewCheckin(context, a);
+                ViewCheckin popupWindow = new ViewCheckin(context, a,title, longitude, latitude, city, country, address, checkinID, remarks);
                 popupWindow.show();
+
             }
         });
 
@@ -90,6 +103,10 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         public TextView textViewHistoryDate;
         public TextView textViewHistoryTime;
         public TextView textViewHistoryCheckinID;
+        public TextView textViewHistoryLong;
+        public TextView textViewHistoryLat;
+
+        public TextView textViewHistoryRemarks;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +119,10 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
             textViewHistoryDate = itemView.findViewById(R.id.textViewHistoryDate);
             textViewHistoryTime = itemView.findViewById(R.id.textViewHistoryTime);
             textViewHistoryCheckinID = itemView.findViewById(R.id.textViewHistoryCheckinID);
+            textViewHistoryLong = itemView.findViewById(R.id.textViewHistoryLong);
+            textViewHistoryLat = itemView.findViewById(R.id.textViewHistoryLat);
+            textViewHistoryRemarks = itemView.findViewById(R.id.textViewHistoryRemarks);
+
         }
     }
 }

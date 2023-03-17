@@ -1,6 +1,8 @@
 package com.example.pjk.mapd_721_final_project.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -39,19 +41,24 @@ public class HistoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private CheckinAdapter checkinAdapter;
     private List<Checkin> checkinList;
-
+    private SharedPreferences sharedPreferences;
+    private String username;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
+
+        sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
+
         checkinList = new ArrayList<>();
         recyclerView = rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         checkinAdapter = new CheckinAdapter(getActivity(), checkinList);
         recyclerView.setAdapter(checkinAdapter);
-
 
         loadHistoryCHeckin();
 
@@ -61,7 +68,7 @@ public class HistoryFragment extends Fragment {
 
     private void loadHistoryCHeckin() {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child("Test").child("checkin");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child(username).child("checkin");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
