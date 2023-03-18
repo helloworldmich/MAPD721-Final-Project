@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -70,11 +71,13 @@ public class HistoryFragment extends Fragment {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child(username).child("checkin");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        Query query = ref.orderByChild("date"); // fix this part to sort by date descending
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 checkinList.clear();
+                int count = (int) dataSnapshot.getChildrenCount();  //count
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // get the values for each checkin entry

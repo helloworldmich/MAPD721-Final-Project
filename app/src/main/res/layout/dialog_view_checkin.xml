@@ -18,7 +18,9 @@
         android:ems="10"
         android:enabled="false"
         android:hint="Title"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#040D47"
+        android:textStyle="bold" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -140,8 +142,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:enabled="false"
         android:hint="Remarks"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/buttonViewCheckinOpenMap"

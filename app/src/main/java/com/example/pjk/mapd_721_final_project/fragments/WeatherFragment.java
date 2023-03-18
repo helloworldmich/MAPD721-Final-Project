@@ -25,7 +25,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -37,12 +40,20 @@ public class WeatherFragment extends Fragment {
     TextView textViewMaxTemp;
     TextView textViewFeelsLike;
     ImageView imageViewWeather;
+
+    TextView textViewWeatherTime;
     String currentCity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        String currentTime = dateFormat.format(new Date());
+        textViewWeatherTime = rootView.findViewById(R.id.textViewWeatherTime);
+        textViewWeatherTime.setText(currentTime);
+
 
         Button buttonRefresh = rootView.findViewById(R.id.buttonRefreshWeather);
 
@@ -62,6 +73,10 @@ public class WeatherFragment extends Fragment {
 
     public void refresh(View view)
     {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        String currentTime = dateFormat.format(new Date());
+        textViewWeatherTime = view.findViewById(R.id.textViewWeatherTime);
+        textViewWeatherTime.setText(currentTime);
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
         String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
 
@@ -71,8 +86,8 @@ public class WeatherFragment extends Fragment {
         textViewMaxTemp = view.findViewById(R.id.textViewMaxTemp);
         textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
         imageViewWeather = view.findViewById(R.id.imageViewWeather);
-        imageViewWeather.setScaleX(3.0f);
-        imageViewWeather.setScaleY(3.0f);
+        imageViewWeather.setScaleX(2.20f);
+        imageViewWeather.setScaleY(2.20f);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
 
 
