@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
+    android:background="@color/popupBackground"
     android:paddingBottom="10dp">
 
     <EditText
@@ -19,7 +21,7 @@
         android:enabled="false"
         android:hint="Title"
         android:inputType="textPersonName"
-        android:textColor="#040D47"
+        android:textColor="@color/mainTextColor"
         android:textStyle="bold" />
 
     <TableLayout
@@ -36,12 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Check-in ID: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewViewCheckinID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxxx" />
         </TableRow>
 
@@ -54,12 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Longitude: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewViewCheckinLong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -72,12 +78,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latitude: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewViewCheckinLat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -90,6 +98,7 @@
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="City: "
                 android:textStyle="bold" />
 
@@ -97,6 +106,7 @@
                 android:id="@+id/textViewViewCheckinCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -109,12 +119,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Country: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewViewCheckinCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -126,6 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Complete Address: "
+        android:textColor="@color/mainTextColor"
         android:textStyle="bold" />
 
     <TextView
@@ -134,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
+        android:textColor="@color/mainTextColor"
         android:text="xxxxxxxx" />
 
     <EditText
@@ -145,13 +159,15 @@
         android:enabled="false"
         android:hint="Remarks"
         android:inputType="textPersonName"
-        android:textColor="#000000" />
+        android:textColor="@color/mainTextColor" />
 
     <Button
         android:id="@+id/buttonViewCheckinOpenMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/mainTextColor"
+        app:backgroundTint="@color/mainButton"
         android:text="Open Map" />
 
     <Button
@@ -159,6 +175,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/mainTextColor"
+        app:backgroundTint="@color/mainButton"
         android:text="Delete" />
 
 </LinearLayout>

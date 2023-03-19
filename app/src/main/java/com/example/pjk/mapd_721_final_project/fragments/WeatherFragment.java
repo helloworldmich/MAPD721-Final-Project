@@ -112,13 +112,7 @@ public class WeatherFragment extends Fragment {
                     textViewMaxTemp.setText(tempMax);
                     textViewFeelsLike.setText(feelsLike);
                     Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@4x.png").into(imageViewWeather);
-//
-//                    System.out.println("Description  = " + description);
-//                    System.out.println("current temp = " + tempCurr);
-//                    System.out.println("min temp = " + tempMin);
-//                    System.out.println("max temp = " + tempMax);
-//                    System.out.println("feels like  = " + feelsLike);
-                    //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
+    android:background="@color/popupBackground"
     android:paddingRight="10dp"
     android:paddingBottom="10dp">
 
@@ -31,6 +33,7 @@
                 android:id="@+id/aa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="Longitude: "
                 android:textStyle="bold" />
 
@@ -38,6 +41,7 @@
                 android:id="@+id/textViewNewCheckinLong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -49,6 +53,7 @@
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="Latitude: "
                 android:textStyle="bold" />
 
@@ -56,6 +61,7 @@
                 android:id="@+id/textViewNewCheckinLat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -68,6 +74,7 @@
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="City: "
                 android:textStyle="bold" />
 
@@ -75,6 +82,7 @@
                 android:id="@+id/textViewNewCheckinCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:text="xxx" />
         </TableRow>
 
@@ -87,11 +95,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Country: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewNewCheckinCountry"
                 android:layout_width="wrap_content"
+                android:textColor="@color/mainTextColor"
                 android:layout_height="wrap_content"
                 android:text="xxx" />
         </TableRow>
@@ -103,6 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/mainTextColor"
         android:text="Complete Address: "
         android:textStyle="bold" />
 
@@ -111,6 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:textColor="@color/mainTextColor"
         android:layout_weight="1"
         android:text="xxxxxxxx" />
 
@@ -128,6 +140,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/mainTextColor"
+        app:backgroundTint="@color/mainButton"
         android:text="Checkin" />
 
 </LinearLayout>
