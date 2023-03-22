@@ -3,12 +3,15 @@ package com.example.pjk.mapd_721_final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.pjk.mapd_721_final_project.fragments.HistoryFragment;
 import com.example.pjk.mapd_721_final_project.fragments.MapFragment;
 import com.example.pjk.mapd_721_final_project.fragments.MeFragment;
+import com.example.pjk.mapd_721_final_project.fragments.SettingsFragment;
 import com.example.pjk.mapd_721_final_project.fragments.WeatherFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -23,6 +26,7 @@ public class MainScreenActivity extends AppCompatActivity {
     MapFragment mapFragment = new MapFragment();
     HistoryFragment historyFragment = new HistoryFragment();
     MeFragment meFragment = new MeFragment();
+    SettingsFragment settingsFragment = new SettingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +64,23 @@ public class MainScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                // handle menu item click here
+//                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

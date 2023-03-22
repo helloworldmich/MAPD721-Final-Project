@@ -40,6 +40,7 @@ public class WeatherFragment extends Fragment {
     TextView textViewMaxTemp;
     TextView textViewFeelsLike;
     ImageView imageViewWeather;
+    TextView textViewWeatherCity;
 
     TextView textViewWeatherTime;
     String currentCity;
@@ -86,6 +87,7 @@ public class WeatherFragment extends Fragment {
         textViewMaxTemp = view.findViewById(R.id.textViewMaxTemp);
         textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
         imageViewWeather = view.findViewById(R.id.imageViewWeather);
+        textViewWeatherCity = view.findViewById(R.id.textViewWeatherCity);
         imageViewWeather.setScaleX(2.20f);
         imageViewWeather.setScaleY(2.20f);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
@@ -105,7 +107,9 @@ public class WeatherFragment extends Fragment {
                     JSONObject weatherObject = jsonArray.getJSONObject(0);
                     String description = weatherObject.getString("description");
                     String icon = weatherObject.getString("icon");
+                    String name =  response.getString("name");
 
+                    textViewWeatherCity.setText(name);
                     textViewDesc.setText(description);
                     textViewCurrentTemp.setText(tempCurr);
                     textViewMinTemp.setText(tempMin);
