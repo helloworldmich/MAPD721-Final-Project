@@ -22,8 +22,20 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0"
             android:src="@drawable/checkin" />
+
+        <TextView
+            android:id="@+id/textViewMeTotalCheckin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="0"
+            android:text="99 Checkins"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,8 +52,20 @@
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0"
             android:src="@drawable/city" />
+
+        <TextView
+            android:id="@+id/textViewMeTotalCities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="99 Total Cities Visited"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -58,8 +82,20 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0"
             android:src="@drawable/country" />
+
+        <TextView
+            android:id="@+id/textViewMeTotalCountries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="99 Total Countries Visited"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -76,24 +112,47 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0"
             android:src="@drawable/favorite" />
+
+        <TextView
+            android:id="@+id/textViewMeTotalFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="99 Favorite Places"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"/>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonMeUpdateAccount"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Account"
-        android:textColor="@color/mainTextColor"
-        app:backgroundTint="@color/mainButton" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:textColor="@color/mainTextColor"
-        app:backgroundTint="@color/mainButton" />
+        <Button
+            android:id="@+id/buttonMeUpdateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Update Account"
+            android:textColor="@color/mainTextColor"
+            app:backgroundTint="@color/mainButton" />
+
+        <Button
+            android:id="@+id/buttonMeLogout"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:text="Logout"
+            android:textColor="@color/mainTextColor"
+            app:backgroundTint="@color/mainButton" />
+    </LinearLayout>
 
 </LinearLayout>
