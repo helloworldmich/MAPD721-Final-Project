@@ -151,6 +151,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         String remarks = "this is my remarks and its longer than my description. yes no yes yes";
         String city = cityName;
         String country = countryName;
+        String postal = postalCode;
 
 //        Checkin checkin = new Checkin(checkinId,date, time, sLongitude, sLatitude, city,country, desc, remarks);
 //        databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
@@ -164,6 +165,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         editor.putString("city", city);
         editor.putString("country", country);
         editor.putString("address", desc);
+        editor.putString("postal", postal);
         editor.apply();
 
         NewCheckin popupWindow = new NewCheckin(getContext());

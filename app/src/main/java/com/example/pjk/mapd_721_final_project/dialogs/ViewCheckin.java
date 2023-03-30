@@ -11,15 +11,21 @@ import android.view.KeyboardShortcutGroup;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.pjk.mapd_721_final_project.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -34,16 +40,24 @@ public class ViewCheckin extends Dialog {
     TextView textViewViewCheckinAddress;
     TextView textViewViewCheckinID;
     EditText editTextViewCheckinRemarks;
+    String username;
 
-    public ViewCheckin(Context context, Activity a, String title, String longitude, String latitude, String city,
-                       String country, String address, String checkinID, String remarks) {
+    String longitude;
+    String latitude;
+
+    Switch switchFavorite;
+
+    public ViewCheckin(Context context, Activity a, String checkinID) {
         super(a);
 
         // Set the layout for the popup window
         setContentView(R.layout.dialog_view_checkin);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
 
         editTextViewCheckinTitle = findViewById(R.id.editTextViewCheckinTitle);
-
+        switchFavorite = findViewById(R.id.switchFavorite);
         textViewViewCheckinLong = findViewById(R.id.textViewViewCheckinLong);
         textViewViewCheckinLat = findViewById(R.id.textViewViewCheckinLat);
         textViewViewCheckinCity  = findViewById(R.id.textViewViewCheckinCity);
@@ -53,14 +67,46 @@ public class ViewCheckin extends Dialog {
         editTextViewCheckinRemarks = findViewById(R.id.editTextViewCheckinRemarks);
         editTextViewCheckinTitle = findViewById(R.id.editTextViewCheckinTitle);
 
-        editTextViewCheckinTitle.setText(title);
-        editTextViewCheckinRemarks.setText(remarks);
-        textViewViewCheckinID.setText(checkinID);
-        textViewViewCheckinLong.setText(longitude);
-        textViewViewCheckinLat.setText(latitude);
-        textViewViewCheckinCity.setText(city);
-        textViewViewCheckinCountry.setText(country);
-        textViewViewCheckinAddress.setText(address);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference checkinRef = database.getReference("user/" + username + "/checkin/" + checkinID);
+
+        checkinRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Retrieve the data for the check-in ID
+                    String city = snapshot.child("city").getValue(String.class);
+                    String country = snapshot.child("country").getValue(String.class);
+                    String date = snapshot.child("date").getValue(String.class);
+                    String desc = snapshot.child("desc").getValue(String.class);
+                    latitude = snapshot.child("latitude").getValue(String.class);
+                    longitude = snapshot.child("longitude").getValue(String.class);
+                    String postal = snapshot.child("postal").getValue(String.class);
+                    String remarks = snapshot.child("remarks").getValue(String.class);
+                    String isFavorite = snapshot.child("isFavorite").getValue(String.class);
+                    String time = snapshot.child("time").getValue(String.class);
+                    long timestamp = snapshot.child("timestamp").getValue(Long.class);
+                    String title = snapshot.child("title").getValue(String.class);
+
+                    editTextViewCheckinTitle.setText(title);
+                    editTextViewCheckinRemarks.setText(remarks);
+                    textViewViewCheckinID.setText(checkinID);
+                    textViewViewCheckinLong.setText(longitude);
+                    textViewViewCheckinLat.setText(latitude);
+                    textViewViewCheckinCity.setText(city);
+                    textViewViewCheckinCountry.setText(country);
+                    textViewViewCheckinAddress.setText(desc);
+                    switchFavorite.setChecked(Boolean.valueOf(isFavorite));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors
+            }
+        });
+
 
         Button buttonViewCheckinOpenMap = findViewById(R.id.buttonViewCheckinOpenMap);
         Button buttonViewCheckinDelete = findViewById(R.id.buttonViewCheckinDelete);
@@ -70,7 +116,7 @@ public class ViewCheckin extends Dialog {
             public void onClick(View v)
             {
                 String location = latitude+","+longitude; // the location you want to show on the map
-                String label = "Label"; // the label you want to show for the location
+                String label = "Marker Here"; // the label you want to show for the location
                 String uriBegin = "geo:" + location;
                 String query = location + "(" + label + ")";
                 String encodedQuery = Uri.encode(query);
@@ -83,13 +129,33 @@ public class ViewCheckin extends Dialog {
             }
         });
 
+        switchFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                String checkinId = checkinID;
+                DatabaseReference isFavoriteRef = database.getReference("user/" + username + "/checkin/" + checkinId + "/isFavorite");
+
+                if(isChecked)
+                {
+                    isFavoriteRef.setValue("true");
+                }
+                else
+                {
+                    isFavoriteRef.setValue("false");
+                }
+
+
+            }
+        });
+
+
         buttonViewCheckinDelete.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-                String username = sharedPreferences.getString("username", "");
+
                 String checkinId = checkinID;
 
                 DatabaseReference checkinRef = FirebaseDatabase.getInstance()

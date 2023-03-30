@@ -60,7 +60,7 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         holder.textViewHistoryAddress.setText(checkin.getDesc());
         holder.textViewHistoryDate.setText(checkin.getDate());
         holder.textViewHistoryTime.setText(checkin.getTime());
-        holder.textViewHistoryCheckinID.setText(checkin.getCheckinID());
+        holder.textViewHistoryCheckinID.setText(checkin.getCheckinId());
         holder.textViewHistoryLong.setText(checkin.getLongitude());
         holder.textViewHistoryLat.setText(checkin.getLatitude());
         holder.textViewHistoryCityCountry.setText(checkin.getCity() + ", " + checkin.getCountry());
@@ -81,7 +81,7 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
                 String country = parts[1].trim();
                 String remarks = holder.textViewHistoryRemarks.getText().toString();
 
-                ViewCheckin popupWindow = new ViewCheckin(context, a,title, longitude, latitude, city, country, address, checkinID, remarks);
+                ViewCheckin popupWindow = new ViewCheckin(context, a,checkinID);
                 popupWindow.show();
 
             }

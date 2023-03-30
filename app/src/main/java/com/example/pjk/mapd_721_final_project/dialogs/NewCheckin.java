@@ -14,10 +14,13 @@ import com.example.pjk.mapd_721_final_project.R;
 import com.example.pjk.mapd_721_final_project.data.Checkin;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewCheckin extends Dialog {
 
@@ -30,6 +33,7 @@ public class NewCheckin extends Dialog {
     EditText editTextNewCheckinRemarks;
     EditText editTextNewCheckinTitle;
     String username;
+    String postalCode;
     private DatabaseReference databaseReferencCheckin;
 
     public NewCheckin(Context context) {
@@ -45,6 +49,7 @@ public class NewCheckin extends Dialog {
         String city = sharedPreferences.getString("city", "");
         String country = sharedPreferences.getString("country", "");
         String address = sharedPreferences.getString("address", "");
+        postalCode = sharedPreferences.getString("postal", "");
 
         sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
@@ -89,11 +94,16 @@ public class NewCheckin extends Dialog {
                 String remarks = editTextNewCheckinRemarks.getText().toString().trim();
                 String title = editTextNewCheckinTitle.getText().toString().trim();
                 String city = textViewNewCheckinCity.getText().toString().trim();
+                String postal = postalCode;
                 String country = textViewNewCheckinCountry.getText().toString().trim();;
+                String isFavorite = "false";
+
+
 
                 databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
                 String checkinId = databaseReferencCheckin.push().getKey();
-                Checkin checkin = new Checkin(checkinId,title, date, time, sLongitude, sLatitude, city,country, desc, remarks);
+                long timestamp = System.currentTimeMillis();
+                Checkin checkin = new Checkin(checkinId,title, date, time, sLongitude, sLatitude, city,country, desc, postal,isFavorite,remarks,timestamp);
                 databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
                 Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
                 dismiss();

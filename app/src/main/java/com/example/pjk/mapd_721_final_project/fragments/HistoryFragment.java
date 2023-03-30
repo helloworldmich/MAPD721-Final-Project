@@ -34,7 +34,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HistoryFragment extends Fragment {
 
@@ -91,9 +93,12 @@ public class HistoryFragment extends Fragment {
                     String city = snapshot.child("city").getValue(String.class);
                     String country = snapshot.child("country").getValue(String.class);
                     String remarks = snapshot.child("remarks").getValue(String.class);
+                    String postal  = snapshot.child("postal").getValue(String.class);
+                    long timestamp = snapshot.child("timestamp").getValue(Long.class);
+                    String isFavorite = snapshot.child("isFavorite").getValue(String.class);
 
                     // create a new Checkin object and add it to the list
-                    checkinList.add(new Checkin(checkinID, title, date, time, longitude, latitude, city, country, desc, remarks));
+                    checkinList.add(new Checkin(checkinID, title, date, time, longitude, latitude, city, country, desc, postal, isFavorite,remarks,timestamp));
 
                 }
 

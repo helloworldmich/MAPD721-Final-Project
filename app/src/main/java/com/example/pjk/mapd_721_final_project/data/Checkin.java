@@ -1,8 +1,10 @@
 package com.example.pjk.mapd_721_final_project.data;
 
+import java.util.Map;
+
 public class Checkin {
 
-    public String checkinID;
+    public String checkinId;
     public String date;
     public String time;
     public String longitude;
@@ -11,13 +13,17 @@ public class Checkin {
     public String country;
     public String desc;
     public String title;
+    public String isFavorite;
     public String remarks;
+    public String postal;
+
+    public long timestamp;
 
     public Checkin() {
     }
 
-    public Checkin(String checkinID, String title,String date, String time, String longitude, String latitude, String city, String country, String desc, String remarks) {
-        this.checkinID = checkinID;
+    public Checkin(String checkinId, String title,String date, String time, String longitude, String latitude, String city, String country, String desc, String postal, String isFavorite,String remarks, long timestamp) {
+        this.checkinId = checkinId;
         this.title = title;
         this.date = date;
         this.time = time;
@@ -26,7 +32,9 @@ public class Checkin {
         this.city = city;
         this.country = country;
         this.desc = desc;
+        this.postal = postal;
         this.remarks = remarks;
+        this.timestamp = timestamp;
     }
 
     public String getDate() {
@@ -37,8 +45,8 @@ public class Checkin {
         return title;
     }
 
-    public String getCheckinID() {
-        return checkinID;
+    public String getCheckinId() {
+        return checkinId;
     }
     public String getTime() {
         return time;
@@ -59,8 +67,14 @@ public class Checkin {
     public String getDesc() {
         return desc;
     }
+    public String getPostal() {
+        return postal;
+    }
     public String getRemarks() {
         return remarks;
+    }
+    public long getTimestamp() {
+        return timestamp;
     }
 
 }

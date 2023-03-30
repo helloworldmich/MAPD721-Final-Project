@@ -161,6 +161,13 @@
         android:inputType="textPersonName"
         android:textColor="@color/mainTextColor" />
 
+    <Switch
+        android:id="@+id/switchFavorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Favorite" />
+
     <Button
         android:id="@+id/buttonViewCheckinOpenMap"
         android:layout_width="match_parent"
