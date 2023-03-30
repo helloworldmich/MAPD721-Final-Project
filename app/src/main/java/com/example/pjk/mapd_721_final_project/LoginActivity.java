@@ -24,23 +24,30 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReferencUser;
     EditText editTextTextLoginUsername;
     EditText editTextTextLoginPassword;
+    SharedPreferences sharedPreferences;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "");
+
         Button buttonLogin = findViewById(R.id.buttonLogin);
         Button buttonLRegister = findViewById(R.id.buttonLRegister);
+        editTextTextLoginUsername = findViewById(R.id.editTextTextLoginUsername);
+        editTextTextLoginPassword = findViewById(R.id.editTextTextLoginPassword);
+
+        editTextTextLoginUsername.setText(username);
 
         buttonLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                editTextTextLoginUsername = findViewById(R.id.editTextTextLoginUsername);
-                editTextTextLoginPassword = findViewById(R.id.editTextTextLoginPassword);
 
-                String username = editTextTextLoginUsername.getText().toString().trim();
+                username = editTextTextLoginUsername.getText().toString().trim();
                 String inputPassword = editTextTextLoginPassword.getText().toString().trim();
 
                 databaseReferencUser = FirebaseDatabase.getInstance().getReference("user/" + username + "/login");
@@ -56,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(password.equals(inputPassword))
                             {
-                                SharedPreferences sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("username", username);
                                 editor.apply();

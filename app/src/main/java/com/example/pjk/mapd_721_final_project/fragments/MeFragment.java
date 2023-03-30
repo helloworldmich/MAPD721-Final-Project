@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -28,6 +29,8 @@ public class MeFragment extends Fragment {
     TextView textViewMeTotalCities;
     TextView textViewMeTotalCountries;
     TextView textViewMeTotalCheckin;
+
+    TextView textViewMeTotalFavorites;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MeFragment extends Fragment {
         textViewMeTotalCities = rootview.findViewById(R.id.textViewMeTotalCities);
         textViewMeTotalCountries = rootview.findViewById(R.id.textViewMeTotalCountries);
         textViewMeTotalCheckin = rootview.findViewById(R.id.textViewMeTotalCheckin);
+        textViewMeTotalFavorites = rootview.findViewById(R.id.textViewMeTotalFavorites);
 
         loadCounts();
 
@@ -50,9 +54,6 @@ public class MeFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("user/"+username+"/checkin");
 
-     //   Query cityQuery = ref.orderByChild("checkin/city").equalTo(true);
-
-// Attach a listener to the query to count the distinct values
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -68,6 +69,7 @@ public class MeFragment extends Fragment {
                         cities.add(city);
                     }
                 }
+
                 for (DataSnapshot checkinSnapshot : dataSnapshot.getChildren()) {
                     String country = checkinSnapshot.child("country").getValue(String.class);
                     if (country != null) {
@@ -87,6 +89,22 @@ public class MeFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle errors here
+            }
+        });
+
+
+        Query query = ref.orderByChild("isFavorite").equalTo("true");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long favoriteCount = snapshot.getChildrenCount();
+
+                textViewMeTotalFavorites.setText(favoriteCount + " Favorite Places");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors
             }
         });
     }
