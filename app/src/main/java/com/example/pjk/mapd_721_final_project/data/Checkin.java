@@ -33,6 +33,7 @@ public class Checkin {
         this.country = country;
         this.desc = desc;
         this.postal = postal;
+        this.isFavorite = isFavorite;
         this.remarks = remarks;
         this.timestamp = timestamp;
     }
@@ -69,6 +70,9 @@ public class Checkin {
     }
     public String getPostal() {
         return postal;
+    }
+    public String getIsFavorite() {
+        return isFavorite;
     }
     public String getRemarks() {
         return remarks;

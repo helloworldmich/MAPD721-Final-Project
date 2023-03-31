@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
@@ -33,8 +35,8 @@
                 android:id="@+id/textViewHistoryCityCountry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
-                android:text="City + country" />
+                android:text="City + country"
+                android:textColor="@color/mainTextColor" />
 
         </LinearLayout>
 
@@ -62,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:textColor="@color/mainTextColor"
-            android:text="Date" />
+            android:text="Date"
+            android:textColor="@color/mainTextColor" />
 
         <TextView
             android:id="@+id/textViewHistoryTime"
@@ -71,8 +73,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="0"
-            android:textColor="@color/mainTextColor"
-            android:text="Time" />
+            android:text="Time"
+            android:textColor="@color/mainTextColor" />
+
+        <TextView
+            android:id="@+id/textViewHistoryFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="#FFB4CE"
+            android:text="❤ Favorite"
+            android:textColor="@color/mainTextColor" />
 
     </LinearLayout>
 
@@ -86,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/mainTextColor"
-            android:text="Complete Address" />
+            android:text="Complete Address"
+            android:textColor="@color/mainTextColor" />
     </LinearLayout>
 
     <LinearLayout

@@ -4,12 +4,14 @@ import static android.app.PendingIntent.getActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import com.example.pjk.mapd_721_final_project.R;
 import com.example.pjk.mapd_721_final_project.data.Checkin;
 import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
 import com.example.pjk.mapd_721_final_project.dialogs.ViewCheckin;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +70,17 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         holder.textViewHistoryLat.setText(checkin.getLatitude());
         holder.textViewHistoryRemarks.setText(checkin.getRemarks());
 
+        if(checkin.isFavorite.equals("true"))
+        {
+            holder.textViewHistoryFavorite.setVisibility(View.VISIBLE);
+            // holder.linearBackground.setBackgroundColor(Color.parseColor("#fccd90"));
+        }
+        else
+        {
+            holder.textViewHistoryFavorite.setVisibility(View.INVISIBLE);
+            //holder.linearBackground.setBackgroundColor(Color.parseColor("#B9BEEC"));
+        }
+
         holder.buttonHistoryView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +122,9 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
 
         public TextView textViewHistoryRemarks;
 
+        public LinearLayout linearBackground;
+        public TextView textViewHistoryFavorite;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -122,6 +139,8 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
             textViewHistoryLong = itemView.findViewById(R.id.textViewHistoryLong);
             textViewHistoryLat = itemView.findViewById(R.id.textViewHistoryLat);
             textViewHistoryRemarks = itemView.findViewById(R.id.textViewHistoryRemarks);
+            linearBackground = itemView.findViewById(R.id.linearBackground);
+            textViewHistoryFavorite = itemView.findViewById(R.id.textViewHistoryFavorite);
 
         }
     }

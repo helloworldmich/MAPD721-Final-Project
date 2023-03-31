@@ -44,6 +44,9 @@ public class WeatherFragment extends Fragment {
 
     TextView textViewWeatherTime;
     String currentCity;
+    Double currentLong;
+    Double currentLat;
+    TextView textViewWeatherCoordinates;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +63,10 @@ public class WeatherFragment extends Fragment {
 
         GpsTracker gpsTracker = new GpsTracker(this.getContext());
         currentCity = gpsTracker.getCityName();
+        currentLong = gpsTracker.getLongitude();
+        currentLat = gpsTracker.getLatitude();
+
+        refresh(rootView);
         buttonRefresh.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -88,8 +95,11 @@ public class WeatherFragment extends Fragment {
         textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
         imageViewWeather = view.findViewById(R.id.imageViewWeather);
         textViewWeatherCity = view.findViewById(R.id.textViewWeatherCity);
+        textViewWeatherCoordinates = view.findViewById(R.id.textViewWeatherCoordinates);
         imageViewWeather.setScaleX(2.20f);
         imageViewWeather.setScaleY(2.20f);
+
+        textViewWeatherCoordinates.setText(currentLat + " , " + currentLong);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
 
 
