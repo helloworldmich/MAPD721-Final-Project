@@ -18,18 +18,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pjk.mapd_721_final_project.GpsTracker;
+import com.example.pjk.mapd_721_final_project.services.GpsTracker;
 import com.example.pjk.mapd_721_final_project.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 
 public class WeatherFragment extends Fragment {

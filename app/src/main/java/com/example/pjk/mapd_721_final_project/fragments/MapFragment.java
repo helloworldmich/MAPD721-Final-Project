@@ -1,7 +1,6 @@
 package com.example.pjk.mapd_721_final_project.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,14 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.pjk.mapd_721_final_project.GpsTracker;
-import com.example.pjk.mapd_721_final_project.MainScreenActivity;
+import com.example.pjk.mapd_721_final_project.services.GpsTracker;
 import com.example.pjk.mapd_721_final_project.R;
-import com.example.pjk.mapd_721_final_project.RegisterActivity;
-import com.example.pjk.mapd_721_final_project.data.Checkin;
-import com.example.pjk.mapd_721_final_project.data.User;
 import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,7 +26,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

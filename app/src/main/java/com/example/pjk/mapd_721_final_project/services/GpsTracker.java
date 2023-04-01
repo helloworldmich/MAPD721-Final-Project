@@ -1,4 +1,4 @@
-package com.example.pjk.mapd_721_final_project;
+package com.example.pjk.mapd_721_final_project.services;
 
 import android.Manifest;
 import android.content.Context;
