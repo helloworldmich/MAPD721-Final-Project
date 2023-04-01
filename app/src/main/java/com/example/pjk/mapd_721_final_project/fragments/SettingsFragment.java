@@ -3,10 +3,13 @@ package com.example.pjk.mapd_721_final_project.fragments;
 import static android.content.Context.ALARM_SERVICE;
 import static androidx.core.content.ContextCompat.getSystemService;
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -48,7 +52,7 @@ public class SettingsFragment extends Fragment {
         Spinner spinnerTime = rootView.findViewById(R.id.spinnerTime);
 
 
-        String[] items = {"1 hour", "2 hours", "4 hours", "10 seconds"};
+        String[] items = {"1 Hour", "2 Hours", "4 Hours", "10 seconds"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTime.setAdapter(adapter);
@@ -100,13 +104,51 @@ public class SettingsFragment extends Fragment {
                 editor.putString("notificationOccurence",selectedTime );
                 editor.apply();
 
-//                Intent intent = new Intent(getActivity(), NotificationService.class);
-//                getActivity().startService(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Settings Updated");
+                if(switchNotification.isChecked())
+                {
+                    int seconds;
+                    switch(selectedTime) {
+                        case "1 Hour":
+                            seconds = 3600;
+                            break;
+                        case "2 Hours":
+                            seconds = 7200;
+                            break;
+                        case "4 Hours":
+                            seconds = 14400;
+                            break;
+                        default:
+                            seconds = 10;
+                    }
+
+                    Intent intent = new Intent(getActivity(), NotificationService.class);
+                    intent.putExtra("seconds", String.valueOf(seconds));
+                    getActivity().startService(intent);
+                    builder.setMessage("You will be Notified to Check in every " + spinnerTime.getSelectedItem());
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), NotificationService.class);
+                    getActivity().stopService(intent);
+                    builder.setMessage("Notification Disabled");
+                }
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do something here
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });
-
         return rootView;
-
     }
+
+
 }
