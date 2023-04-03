@@ -26,119 +26,131 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="50dp"
         android:background="@color/secondaryBackground"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:orientation="horizontal">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Username:"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="Username:"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="18sp" />
+            <EditText
+                android:id="@+id/editTextTextLoginUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/mainTextColor"
+                android:maxLines="1"
+                android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTextTextLoginUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="14sp" />
-            </TableRow>
+        </LinearLayout>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text="Password:"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="18sp" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Password:"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTextTextLoginPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:ems="10"
-                    android:inputType="textPassword"
-                    android:textColor="@color/mainButton"
-                    android:textSize="14sp" />
-            </TableRow>
+            <EditText
+                android:id="@+id/editTextTextLoginPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">>
 
-                <Button
-                    android:id="@+id/buttonLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Login"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="12sp"
-                    app:backgroundTint="@color/mainButton"
-                    app:icon="@drawable/baseline_login_24"
-                    app:iconTint="@color/mainTextColor" />
-            </TableRow>
+            <CheckBox
+                android:id="@+id/checkBoxRememberMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Remember Me" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/buttonLRegister"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Register"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/mainTextColor"
-                    android:textSize="12sp"
-                    app:backgroundTint="@color/mainButton"
-                    app:icon="@drawable/baseline_post_add_24"
-                    app:iconTint="@color/mainTextColor" />
-            </TableRow>
-        </TableLayout>
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp"
+                android:text="Login"
+                android:textAlignment="textStart"
+                android:textColor="@color/mainTextColor"
+                android:textSize="12sp"
+                app:backgroundTint="@color/mainButton"
+                app:icon="@drawable/baseline_login_24"
+                app:iconTint="@color/mainTextColor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="Register"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="#162AEA"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

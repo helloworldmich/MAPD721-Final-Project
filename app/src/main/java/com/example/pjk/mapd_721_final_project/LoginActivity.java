@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         username = sharedPreferences.getString("username", "");
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
-        Button buttonLRegister = findViewById(R.id.buttonLRegister);
+        TextView textViewRegister = findViewById(R.id.textViewRegister);
         editTextTextLoginUsername = findViewById(R.id.editTextTextLoginUsername);
         editTextTextLoginPassword = findViewById(R.id.editTextTextLoginPassword);
 
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        buttonLRegister.setOnClickListener(new View.OnClickListener()
+        textViewRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
