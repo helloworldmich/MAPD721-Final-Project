@@ -125,6 +125,7 @@ public class WeatherFragment extends Fragment {
                     textViewFeelsLike.setText(feelsLike);
                     Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@4x.png").into(imageViewWeather);
 
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

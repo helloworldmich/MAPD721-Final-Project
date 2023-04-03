@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewWeatherCity" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginLeft="20dp"
@@ -91,14 +91,42 @@
         <ImageView
             android:id="@+id/imageViewWeather"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:foregroundGravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Today it's"
+                android:textAlignment="textEnd"
+                android:textColor="@color/mainTextColor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textViewWeatherDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textAlignment="textEnd"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,25 +139,16 @@
         android:background="@color/secondaryBackground">
 
         <TableLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
             tools:layout_editor_absoluteY="116dp">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description" />
-
-                <TextView
-                    android:id="@+id/textViewWeatherDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp" />
             </TableRow>
 
             <TableRow
@@ -140,13 +159,15 @@
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Current Temperature" />
+                    android:text="Current Temperature"
+                    android:textColor="@color/mainTextColor" />
 
                 <TextView
                     android:id="@+id/textViewCurrentTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/mainTextColor" />
             </TableRow>
 
             <TableRow
@@ -157,13 +178,15 @@
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Min Temperature" />
+                    android:text="Min Temperature"
+                    android:textColor="@color/mainTextColor" />
 
                 <TextView
                     android:id="@+id/textViewMinTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/mainTextColor" />
             </TableRow>
 
             <TableRow
@@ -174,13 +197,15 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Max Temperature" />
+                    android:text="Max Temperature"
+                    android:textColor="@color/mainTextColor" />
 
                 <TextView
                     android:id="@+id/textViewMaxTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/mainTextColor" />
             </TableRow>
 
             <TableRow
@@ -191,16 +216,29 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Feels like:" />
+                    android:text="Feels like:"
+                    android:textColor="@color/mainTextColor" />
 
                 <TextView
                     android:id="@+id/textViewFeelsLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/mainTextColor" />
             </TableRow>
 
         </TableLayout>
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".75"
+            android:scaleY=".75"
+            android:src="@drawable/iconstemp"
+            android:layout_gravity="end"
+            tools:srcCompat="@drawable/thermometer" />
+
     </LinearLayout>
 
 
@@ -208,10 +246,10 @@
         android:id="@+id/buttonRefreshWeather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/mainTextColor"
-        app:backgroundTint="@color/mainButton"
-        android:onClick="refresh"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
-        android:text="Refresh" />
+        android:onClick="refresh"
+        android:text="☁ Refresh"
+        android:textColor="@color/mainTextColor"
+        app:backgroundTint="@color/mainButton" />
 </LinearLayout>
