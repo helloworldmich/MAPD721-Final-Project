@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextTextLoginUsername;
     EditText editTextTextLoginPassword;
     SharedPreferences sharedPreferences;
+
+    CheckBox checkBoxRememberMe;
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +39,40 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPreferences = this.getSharedPreferences("login", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
+        String password = sharedPreferences.getString("password", "");
+        String rememberMe = sharedPreferences.getString("rememberMe", "");
 
         Button buttonLogin = findViewById(R.id.buttonLogin);
         TextView textViewRegister = findViewById(R.id.textViewRegister);
         editTextTextLoginUsername = findViewById(R.id.editTextTextLoginUsername);
         editTextTextLoginPassword = findViewById(R.id.editTextTextLoginPassword);
+        checkBoxRememberMe = findViewById(R.id.checkBoxRememberMe);
 
-        editTextTextLoginUsername.setText(username);
+        if(rememberMe.equals("Y"))
+        {
+            editTextTextLoginUsername.setText(username);
+            editTextTextLoginPassword.setText(password);
+            checkBoxRememberMe.setChecked(true);
+        }
+        else
+        {
+            editTextTextLoginUsername.setText("");
+            editTextTextLoginPassword.setText("");
+            checkBoxRememberMe.setChecked(false);
+        }
 
         buttonLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                // Check for internet connectivity
+                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                if (networkInfo == null || !networkInfo.isConnected()) {
+                    Toast.makeText(LoginActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 username = editTextTextLoginUsername.getText().toString().trim();
                 String inputPassword = editTextTextLoginPassword.getText().toString().trim();
@@ -66,7 +92,20 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 sharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", username);
+
+                                if(checkBoxRememberMe.isChecked())
+                                {
+                                    editor.putString("username", username);
+                                    editor.putString("password", inputPassword);
+                                    editor.putString("rememberMe", "Y");
+                                }
+                                else
+                                {
+                                    editor.putString("username", "");
+                                    editor.putString("password", "");
+                                    editor.putString("rememberMe", "N");
+                                }
+
                                 editor.apply();
                                 startActivity(new Intent(getApplicationContext(),MainScreenActivity.class));
                             }

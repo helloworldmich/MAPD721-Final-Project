@@ -63,7 +63,7 @@ public class NotificationService extends Service {
 
     private Notification createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.wanderly_24)
                 .setContentTitle("Wanderly")
                 .setContentText("Notification is now Enabled")
                 .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -71,8 +71,8 @@ public class NotificationService extends Service {
                 .setOngoing(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "My Channel",
-                    NotificationManager.IMPORTANCE_LOW);
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "default",
+                    NotificationManager.IMPORTANCE_DEFAULT);
             mNotificationManager.createNotificationChannel(channel);
         }
 
@@ -102,11 +102,15 @@ public class NotificationService extends Service {
 
     private void showNotification() {
 
+        Intent intent = new Intent(this, LoginActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "default")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.wanderly_48)
                 .setContentTitle("Time to Check in!")
-                .setContentText("Would you like to checkin now?");
+                .setContentText("Would you like to checkin now?")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
 
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
 

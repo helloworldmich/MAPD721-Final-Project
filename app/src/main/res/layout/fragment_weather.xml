@@ -86,7 +86,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/secondaryBackground">
+        android:background="@color/secondaryBackground"
+        android:paddingLeft="5dp">
 
         <ImageView
             android:id="@+id/imageViewWeather"
@@ -235,7 +236,7 @@
             android:layout_height="wrap_content"
             android:scaleX=".75"
             android:scaleY=".75"
-            android:src="@drawable/iconstemp"
+            android:src="@drawable/thermometer"
             android:layout_gravity="end"
             tools:srcCompat="@drawable/thermometer" />
 

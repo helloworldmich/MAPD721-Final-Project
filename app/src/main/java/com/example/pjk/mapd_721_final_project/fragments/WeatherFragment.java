@@ -70,6 +70,10 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
+                GpsTracker gpsTracker = new GpsTracker(getContext());
+                currentCity = gpsTracker.getCityName();
+                currentLong = gpsTracker.getLongitude();
+                currentLat = gpsTracker.getLatitude();
                 refresh(rootView);
             }
         });
@@ -84,7 +88,7 @@ public class WeatherFragment extends Fragment {
         textViewWeatherTime = view.findViewById(R.id.textViewWeatherTime);
         textViewWeatherTime.setText(currentTime);
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
-        String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity.replace(" ", "%20")+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
 
         textViewDesc = view.findViewById(R.id.textViewWeatherDesc);
         textViewCurrentTemp = view.findViewById(R.id.textViewCurrentTemp);

@@ -1,6 +1,7 @@
 package com.example.pjk.mapd_721_final_project.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pjk.mapd_721_final_project.R;
@@ -41,10 +43,31 @@ public class MeFragment extends Fragment {
         textViewMeTotalCountries = rootview.findViewById(R.id.textViewMeTotalCountries);
         textViewMeTotalCheckin = rootview.findViewById(R.id.textViewMeTotalCheckin);
         textViewMeTotalFavorites = rootview.findViewById(R.id.textViewMeTotalFavorites);
+        Button buttonMeLogout = rootview.findViewById(R.id.buttonMeLogout);
 
         loadCounts();
 
+        buttonMeLogout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                shareContent();
+
+            }
+        });
+
         return rootview;
+    }
+
+    private void shareContent() {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "Check out this amazing content!";
+        String shareSubject = "Subject Here";
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
 
     private void loadCounts()

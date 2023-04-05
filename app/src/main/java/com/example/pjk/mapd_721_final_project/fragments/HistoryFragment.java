@@ -34,6 +34,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,13 +75,12 @@ public class HistoryFragment extends Fragment {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("user").child(username).child("checkin");
 
-        Query query = ref.orderByChild("date"); // fix this part to sort by date descending
+        Query query = ref.orderByChild("timestamp"); // fix this part to sort by date descending
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 checkinList.clear();
-                int count = (int) dataSnapshot.getChildrenCount();  //count
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // get the values for each checkin entry
@@ -101,6 +102,14 @@ public class HistoryFragment extends Fragment {
                     checkinList.add(new Checkin(checkinID, title, date, time, longitude, latitude, city, country, desc, postal, isFavorite,remarks,timestamp));
 
                 }
+
+                //this will sort from latest to oldest timestamp
+                Collections.sort(checkinList, new Comparator<Checkin>() {
+                    @Override
+                    public int compare(Checkin c1, Checkin c2) {
+                        return Long.compare(c2.getTimestamp(), c1.getTimestamp());
+                    }
+                });
 
                 // update the RecyclerView
                 checkinAdapter.notifyDataSetChanged();
