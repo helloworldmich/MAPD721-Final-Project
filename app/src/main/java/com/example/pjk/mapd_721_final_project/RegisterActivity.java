@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Button buttonRegister = findViewById(R.id.buttonRegister);
+        Button buttonRegisterCancel = findViewById(R.id.buttonRegisterCancel);
 
         buttonRegister.setOnClickListener(new View.OnClickListener()
         {
@@ -36,6 +37,17 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 register();
+            }
+        });
+
+        buttonRegisterCancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

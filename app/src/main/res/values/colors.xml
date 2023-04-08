@@ -13,6 +13,7 @@
     <color name="mainTextColor">#060A31</color>
     <color name="popupBackground">#E2E4F8</color>
     <color name="navigationBar">#060A31</color>
+    <color name="negative">#FFFF6152</color>
 
 
 </resources>
