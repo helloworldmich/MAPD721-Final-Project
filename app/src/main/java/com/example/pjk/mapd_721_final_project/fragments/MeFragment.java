@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pjk.mapd_721_final_project.R;
+import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
+import com.example.pjk.mapd_721_final_project.dialogs.UpdateAccount;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +46,8 @@ public class MeFragment extends Fragment {
         textViewMeTotalCheckin = rootview.findViewById(R.id.textViewMeTotalCheckin);
         textViewMeTotalFavorites = rootview.findViewById(R.id.textViewMeTotalFavorites);
         Button buttonMeLogout = rootview.findViewById(R.id.buttonMeLogout);
+        Button buttonMeUpdateAccount = rootview.findViewById(R.id.buttonMeUpdateAccount);
+
 
         loadCounts();
 
@@ -53,6 +57,17 @@ public class MeFragment extends Fragment {
             public void onClick(View v)
             {
                 shareContent();
+
+            }
+        });
+
+        buttonMeUpdateAccount.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                UpdateAccount popupWindow = new UpdateAccount(getContext());
+                popupWindow.show();
 
             }
         });

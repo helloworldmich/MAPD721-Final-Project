@@ -152,7 +152,7 @@
             android:layout_weight="0"
             android:text="Logout"
             android:textColor="@color/mainTextColor"
-            app:backgroundTint="@color/mainButton" />
+            app:backgroundTint="@color/negative" />
     </LinearLayout>
 
 </LinearLayout>
