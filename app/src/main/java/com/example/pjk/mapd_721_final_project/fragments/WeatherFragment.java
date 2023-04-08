@@ -87,6 +87,12 @@ public class WeatherFragment extends Fragment {
         String currentTime = dateFormat.format(new Date());
         textViewWeatherTime = view.findViewById(R.id.textViewWeatherTime);
         textViewWeatherTime.setText(currentTime);
+
+        if(currentCity == null)
+        {
+            currentCity = "Toronto";
+        }
+
         RequestQueue queue = Volley.newRequestQueue(getContext().getApplicationContext());
       //  String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity.replace(" ", "%20")+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
         String url = "http://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=48e94cfe895bf7c584b02fa01b5cad5a&units=metric";
