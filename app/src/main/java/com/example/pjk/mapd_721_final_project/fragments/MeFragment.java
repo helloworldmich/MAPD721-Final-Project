@@ -79,7 +79,7 @@ public class MeFragment extends Fragment {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String shareBody = "Check out this amazing content!";
-        String shareSubject = "Subject Here";
+        String shareSubject = "Sharing my Checkin";
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share using"));

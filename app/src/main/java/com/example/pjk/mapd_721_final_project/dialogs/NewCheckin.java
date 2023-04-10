@@ -1,7 +1,9 @@
 package com.example.pjk.mapd_721_final_project.dialogs;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,15 +100,21 @@ public class NewCheckin extends Dialog {
                 String country = textViewNewCheckinCountry.getText().toString().trim();;
                 String isFavorite = "false";
 
+                if(title.isEmpty())
+                {
+                    Toast.makeText(getContext(), "Please enter Title!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
 
-
-                databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
-                String checkinId = databaseReferencCheckin.push().getKey();
-                long timestamp = System.currentTimeMillis();
-                Checkin checkin = new Checkin(checkinId,title, date, time, sLongitude, sLatitude, city,country, desc, postal,isFavorite,remarks,timestamp);
-                databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
-                Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
-                dismiss();
+                    databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
+                    String checkinId = databaseReferencCheckin.push().getKey();
+                    long timestamp = System.currentTimeMillis();
+                    Checkin checkin = new Checkin(checkinId,title, date, time, sLongitude, sLatitude, city,country, desc, postal,isFavorite,remarks,timestamp);
+                    databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
+                    Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
 
             }
         });

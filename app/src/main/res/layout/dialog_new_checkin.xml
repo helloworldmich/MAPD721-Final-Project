@@ -1,94 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/mainBackground"
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingEnd="10dp"
-    android:background="@color/popupBackground"
     android:paddingRight="10dp"
     android:paddingBottom="10dp">
-
-    <EditText
-        android:id="@+id/editTextNewCheckinTitle"
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Title"
-        android:inputType="textPersonName" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_marginTop="5dp"
+        android:background="@color/secondaryBackground">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textColor="@color/mainTextColor"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTextNewCheckinTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textPersonName" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp">
 
             <TextView
                 android:id="@+id/aa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
                 android:text="Longitude: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewNewCheckinLong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
-                android:text="xxx" />
+                android:text="xxx"
+                android:textColor="@color/mainTextColor" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp">
 
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
                 android:text="Latitude: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewNewCheckinLat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
-                android:text="xxx" />
+                android:text="xxx"
+                android:textColor="@color/mainTextColor" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
                 android:text="City: "
+                android:textColor="@color/mainTextColor"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewNewCheckinCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mainTextColor"
-                android:text="xxx" />
+                android:text="xxx"
+                android:textColor="@color/mainTextColor" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp">
 
             <TextView
                 android:id="@+id/textView30"
@@ -101,47 +129,76 @@
             <TextView
                 android:id="@+id/textViewNewCheckinCountry"
                 android:layout_width="wrap_content"
-                android:textColor="@color/mainTextColor"
                 android:layout_height="wrap_content"
-                android:text="xxx" />
+                android:text="xxx"
+                android:textColor="@color/mainTextColor" />
         </TableRow>
 
     </TableLayout>
 
-    <TextView
-        android:id="@+id/textView32"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/mainTextColor"
-        android:text="Complete Address: "
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:background="@color/secondaryBackground"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewNewCheckinAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/mainTextColor"
-        android:layout_weight="1"
-        android:text="xxxxxxxx" />
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@color/secondaryBackground"
+            android:text="Complete Address: "
+            android:textColor="@color/mainTextColor"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editTextNewCheckinRemarks"
+        <TextView
+            android:id="@+id/textViewNewCheckinAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="xxxxxxxx"
+            android:textColor="@color/mainTextColor" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Remarks"
-        android:inputType="textPersonName" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:background="@color/secondaryBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Remarks"
+            android:textColor="@color/mainTextColor"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextNewCheckinRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonNewCheckin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:text="Checkin"
         android:textColor="@color/mainTextColor"
-        app:backgroundTint="@color/mainButton"
-        android:text="Checkin" />
+        app:backgroundTint="@color/mainButton" />
 
 </LinearLayout>

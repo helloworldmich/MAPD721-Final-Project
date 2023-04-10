@@ -55,7 +55,6 @@ public class ViewCheckin extends Dialog {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
 
-
         editTextViewCheckinTitle = findViewById(R.id.editTextViewCheckinTitle);
         switchFavorite = findViewById(R.id.switchFavorite);
         textViewViewCheckinLong = findViewById(R.id.textViewViewCheckinLong);
@@ -65,7 +64,7 @@ public class ViewCheckin extends Dialog {
         textViewViewCheckinCountry = findViewById(R.id.textViewViewCheckinCountry);
         textViewViewCheckinAddress = findViewById(R.id.textViewViewCheckinAddress);
         editTextViewCheckinRemarks = findViewById(R.id.editTextViewCheckinRemarks);
-        editTextViewCheckinTitle = findViewById(R.id.editTextViewCheckinTitle);
+
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -110,6 +109,7 @@ public class ViewCheckin extends Dialog {
 
         Button buttonViewCheckinOpenMap = findViewById(R.id.buttonViewCheckinOpenMap);
         Button buttonViewCheckinDelete = findViewById(R.id.buttonViewCheckinDelete);
+        Button buttonViewCheckinShare = findViewById(R.id.buttonViewCheckinShare);
         buttonViewCheckinOpenMap.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -122,6 +122,7 @@ public class ViewCheckin extends Dialog {
                 String encodedQuery = Uri.encode(query);
                 String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
                 Uri uri = Uri.parse(uriString);
+                System.out.println(uriString);
                 Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, uri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 v.getContext().startActivity(mapIntent);
@@ -145,7 +146,6 @@ public class ViewCheckin extends Dialog {
                     isFavoriteRef.setValue("false");
                 }
 
-
             }
         });
 
@@ -168,11 +168,32 @@ public class ViewCheckin extends Dialog {
             }
         });
 
+        buttonViewCheckinShare.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                shareContent();
+
+            }
+        });
+
 
     }
 
 
-
+    private void shareContent() {
+        String title = editTextViewCheckinTitle.getText().toString().trim();
+        String cityCountry = textViewViewCheckinCity.getText().toString().trim() + ", " + textViewViewCheckinCountry.getText().toString().trim();
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = title + " - " + cityCountry;
+        String shareSubject = "Sharing my Checkin";
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        this.getContext().startActivity(Intent.createChooser(sharingIntent, "Share using"));
+    }
 
     @Override
     public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, @Nullable Menu menu, int deviceId) {

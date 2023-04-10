@@ -14,6 +14,8 @@
     <color name="popupBackground">#E2E4F8</color>
     <color name="navigationBar">#060A31</color>
     <color name="negative">#FFFF6152</color>
+    <color name="favoriteOff">#737DE1</color>
+    <color name="favoriteOn">#FF377B</color>
 
 
 </resources>
