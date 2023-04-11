@@ -1,6 +1,5 @@
 package com.example.pjk.mapd_721_final_project.dialogs;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -48,7 +47,6 @@ public class ViewCheckin extends Dialog {
     TextView textViewViewCheckinID;
     EditText editTextViewCheckinRemarks;
     String username;
-
     String longitude;
     String latitude;
 
@@ -71,8 +69,6 @@ public class ViewCheckin extends Dialog {
         textViewViewCheckinCountry = findViewById(R.id.textViewViewCheckinCountry);
         textViewViewCheckinAddress = findViewById(R.id.textViewViewCheckinAddress);
         editTextViewCheckinRemarks = findViewById(R.id.editTextViewCheckinRemarks);
-
-
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference checkinRef = database.getReference("user/" + username + "/checkin/" + checkinID);
@@ -113,7 +109,6 @@ public class ViewCheckin extends Dialog {
             }
         });
 
-
         Button buttonViewCheckinOpenMap = findViewById(R.id.buttonViewCheckinOpenMap);
         Button buttonViewCheckinDelete = findViewById(R.id.buttonViewCheckinDelete);
         Button buttonViewCheckinShare = findViewById(R.id.buttonViewCheckinShare);
@@ -143,7 +138,6 @@ public class ViewCheckin extends Dialog {
                 {
                     isFavoriteRef.setValue("false");
                 }
-
             }
         });
 
@@ -196,7 +190,6 @@ public class ViewCheckin extends Dialog {
             }
         });
 
-
     }
 
 
@@ -233,17 +226,16 @@ public class ViewCheckin extends Dialog {
             }
         });
 
-        AlertDialog dialog = builder.show(); // store the dialog instance
+        AlertDialog dialog = builder.show();
 
         Button closeButton = view.findViewById(R.id.buttonDialogMapClose);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss(); // call dismiss() on the dialog instance
+                dialog.dismiss();
             }
         });
     }
-
 
     @Override
     public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, @Nullable Menu menu, int deviceId) {

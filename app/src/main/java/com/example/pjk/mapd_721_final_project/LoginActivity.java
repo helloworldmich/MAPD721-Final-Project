@@ -24,12 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
-
     private DatabaseReference databaseReferencUser;
     EditText editTextTextLoginUsername;
     EditText editTextTextLoginPassword;
     SharedPreferences sharedPreferences;
-
     CheckBox checkBoxRememberMe;
     String username;
     @Override
@@ -126,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-
             }
         });
 
@@ -138,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
             }
         });
-
 
     }
 }

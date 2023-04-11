@@ -41,7 +41,6 @@ public class NewCheckin extends Dialog {
     public NewCheckin(Context context) {
         super(context);
 
-
         // Set the layout for the popup window
         setContentView(R.layout.dialog_new_checkin);
 
@@ -55,7 +54,6 @@ public class NewCheckin extends Dialog {
 
         sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-
 
         textViewNewCheckinLong = findViewById(R.id.textViewNewCheckinLong);
         textViewNewCheckinLat = findViewById(R.id.textViewNewCheckinLat);
@@ -71,11 +69,9 @@ public class NewCheckin extends Dialog {
         textViewNewCheckinCountry.setText(country);
         textViewNewCheckinAddress.setText(address);
 
-
         // Set the width and height of the popup window
         getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // Find the close button and set a click listener to dismiss the popup window
         Button checkin = findViewById(R.id.buttonNewCheckin);
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override

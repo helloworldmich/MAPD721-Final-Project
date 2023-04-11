@@ -25,7 +25,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class NotificationService extends Service {
-
     private static final String TAG = "NotificationService";
     private static final int NOTIFICATION_ID = 100;
     public static int SECONDS = 0;
@@ -76,7 +75,6 @@ public class NotificationService extends Service {
             mNotificationManager.createNotificationChannel(channel);
         }
 
-
         return builder.build();
     }
 
@@ -113,7 +111,6 @@ public class NotificationService extends Service {
                 .setAutoCancel(true);
 
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
-
 
     }
 

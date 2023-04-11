@@ -29,9 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class MeFragment extends Fragment {
-
     TextView textViewMeTotalCities;
     TextView textViewMeTotalCountries;
     TextView textViewMeTotalCheckin;
@@ -40,7 +38,6 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_me, container, false);
 
         textViewMeTotalCities = rootview.findViewById(R.id.textViewMeTotalCities);
@@ -49,7 +46,6 @@ public class MeFragment extends Fragment {
         textViewMeTotalFavorites = rootview.findViewById(R.id.textViewMeTotalFavorites);
         Button buttonMeLogout = rootview.findViewById(R.id.buttonMeLogout);
         Button buttonMeUpdateAccount = rootview.findViewById(R.id.buttonMeUpdateAccount);
-
 
         loadCounts();
 
@@ -76,8 +72,6 @@ public class MeFragment extends Fragment {
 
         return rootview;
     }
-
-
 
     private void loadCounts()
     {
@@ -123,7 +117,6 @@ public class MeFragment extends Fragment {
                 // Handle errors here
             }
         });
-
 
         Query query = ref.orderByChild("isFavorite").equalTo("true");
         query.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class GpsTracker implements LocationListener {
-
     private final Context context;
     private Location location;
     private double latitude;
@@ -72,7 +71,7 @@ public class GpsTracker implements LocationListener {
                     }
                 }
             } else {
-                // Location permissions are not granted
+                System.out.println("PERMISSION NOT GRANTED");
             }
 
         } catch (Exception e) {
@@ -174,12 +173,6 @@ public class GpsTracker implements LocationListener {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             if (addresses != null && addresses.size() > 0) {
                 String nearby = addresses.get(0).getFeatureName();
-//                System.out.println("featureName = " + addresses.get(0).getFeatureName());
-//                System.out.println("phone = " + addresses.get(0).getPhone());
-//                System.out.println("url = " + addresses.get(0).getUrl());
-//                System.out.println("extras = " + addresses.get(0).getExtras());
-//                System.out.println("locale = " + addresses.get(0).getLocale());
-//                System.out.println("main road = " + addresses.get(0).getThoroughfare());
                 return nearby;
             }
         } catch (IOException e) {

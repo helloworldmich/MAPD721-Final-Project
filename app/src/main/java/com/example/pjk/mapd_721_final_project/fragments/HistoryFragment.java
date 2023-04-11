@@ -41,8 +41,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HistoryFragment extends Fragment {
-
-
     private RecyclerView recyclerView;
     private CheckinAdapter checkinAdapter;
     private List<Checkin> checkinList;
@@ -51,13 +49,11 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
 
         sharedPreferences = getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-
 
         checkinList = new ArrayList<>();
         recyclerView = rootView.findViewById(R.id.recycler_view);
@@ -69,7 +65,6 @@ public class HistoryFragment extends Fragment {
 
         return rootView;
     }
-
 
     private void loadHistoryCHeckin() {
 
@@ -83,6 +78,7 @@ public class HistoryFragment extends Fragment {
                 checkinList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
                     // get the values for each checkin entry
                     String checkinID = snapshot.getKey();
                     String title = snapshot.child("title").getValue(String.class);
@@ -122,6 +118,5 @@ public class HistoryFragment extends Fragment {
         });
 
     }
-
 
 }

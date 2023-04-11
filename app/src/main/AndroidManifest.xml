@@ -35,6 +35,7 @@
         </activity>
 
         <service android:name=".services.NotificationService" />
+
         <service
             android:name=".services.GpsTracker"
             android:enabled="true"

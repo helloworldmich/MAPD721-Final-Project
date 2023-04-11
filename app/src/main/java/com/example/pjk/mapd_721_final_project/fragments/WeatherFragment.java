@@ -29,9 +29,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class WeatherFragment extends Fragment {
-
     TextView textViewDesc;
     TextView textViewCurrentTemp;
     TextView textViewMinTemp;
@@ -39,7 +37,6 @@ public class WeatherFragment extends Fragment {
     TextView textViewFeelsLike;
     ImageView imageViewWeather;
     TextView textViewWeatherCity;
-
     TextView textViewWeatherTime;
     String currentCity;
     Double currentLong;
@@ -55,7 +52,6 @@ public class WeatherFragment extends Fragment {
         String currentTime = dateFormat.format(new Date());
         textViewWeatherTime = rootView.findViewById(R.id.textViewWeatherTime);
         textViewWeatherTime.setText(currentTime);
-
 
         Button buttonRefresh = rootView.findViewById(R.id.buttonRefreshWeather);
 
@@ -109,8 +105,6 @@ public class WeatherFragment extends Fragment {
 
         textViewWeatherCoordinates.setText(currentLat + " , " + currentLong);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
-
-
             @Override
             public void onResponse(JSONObject response) {
 
@@ -134,7 +128,6 @@ public class WeatherFragment extends Fragment {
                     textViewMaxTemp.setText(tempMax);
                     textViewFeelsLike.setText(feelsLike);
                     Picasso.get().load("https://openweathermap.org/img/wn/"+icon+"@4x.png").into(imageViewWeather);
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

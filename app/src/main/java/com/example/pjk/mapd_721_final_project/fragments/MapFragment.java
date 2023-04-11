@@ -32,11 +32,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private GpsTracker gpsTracker;
-    private DatabaseReference databaseReferencCheckin;
     double longitude;
     double latitude;
     String cityName;
@@ -69,7 +67,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-
         mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
 
@@ -89,8 +86,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-
-
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -105,15 +100,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         stateName = gpsTracker.getStateName();
         nearby = gpsTracker.getNearbyPlace();
 
-        // Add a marker in Sydney and move the camera
-        LatLng centennial = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(centennial).title(addressName));
+        LatLng ll = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(ll).title(addressName));
         // below line is use to add custom marker on our map.
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centennial, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
 
     }
-
     @NonNull
     @Override
     public CreationExtras getDefaultViewModelCreationExtras() {
@@ -122,8 +115,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public void buttonCheckinClicked()
     {
-
-
         Calendar calendar = Calendar.getInstance();
         Date currentTime = calendar.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -131,24 +122,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String timeString = timeFormat.format(currentTime);
 
-
-//        databaseReferencCheckin = FirebaseDatabase.getInstance().getReference("user");
-//        String checkinId = databaseReferencCheckin.push().getKey();
-
         String date = dateString;
         String time = timeString;
         String sLongitude = String.valueOf(longitude);
         String sLatitude = String.valueOf(latitude);
         String desc = addressName;
-        String remarks = "this is my remarks and its longer than my description. yes no yes yes";
         String city = cityName;
         String country = countryName;
         String postal = postalCode;
-
-//        Checkin checkin = new Checkin(checkinId,date, time, sLongitude, sLatitude, city,country, desc, remarks);
-//        databaseReferencCheckin.child(username).child("checkin").child(checkinId).setValue(checkin);
-//        Toast.makeText(getContext(), "Successfully Checked in!", Toast.LENGTH_SHORT).show();
-//
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("checkin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

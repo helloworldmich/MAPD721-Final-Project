@@ -51,7 +51,6 @@ public class SettingsFragment extends Fragment {
         Switch switchNotification = rootView.findViewById(R.id.switchNotification);
         Spinner spinnerTime = rootView.findViewById(R.id.spinnerTime);
 
-
         String[] items = {"1 Hour", "2 Hours", "4 Hours", "10 seconds"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

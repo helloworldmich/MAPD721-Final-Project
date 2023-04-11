@@ -54,7 +54,6 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Checkin checkin = checkins.get(position);
@@ -73,12 +72,10 @@ public class CheckinAdapter extends RecyclerView.Adapter<CheckinAdapter.ViewHold
         if(checkin.isFavorite.equals("true"))
         {
             holder.textViewHistoryFavorite.setVisibility(View.VISIBLE);
-            // holder.linearBackground.setBackgroundColor(Color.parseColor("#fccd90"));
         }
         else
         {
             holder.textViewHistoryFavorite.setVisibility(View.INVISIBLE);
-            //holder.linearBackground.setBackgroundColor(Color.parseColor("#B9BEEC"));
         }
 
         holder.buttonHistoryView.setOnClickListener(new View.OnClickListener() {

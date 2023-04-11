@@ -1,6 +1,5 @@
 package com.example.pjk.mapd_721_final_project.data;
 
-import java.util.Map;
 
 public class Checkin {
 

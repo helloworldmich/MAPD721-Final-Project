@@ -19,9 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainScreenActivity extends AppCompatActivity {
-
     BottomNavigationView bottomNavigationView;
-
     WeatherFragment weatherFragment = new WeatherFragment();
     MapFragment mapFragment = new MapFragment();
     HistoryFragment historyFragment = new HistoryFragment();
@@ -75,8 +73,6 @@ public class MainScreenActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
-                // handle menu item click here
-//                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
                 return true;
             default:
