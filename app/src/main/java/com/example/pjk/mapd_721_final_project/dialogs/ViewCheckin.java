@@ -2,12 +2,14 @@ package com.example.pjk.mapd_721_final_project.dialogs;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.KeyboardShortcutGroup;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.pjk.mapd_721_final_project.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +39,6 @@ import java.util.List;
 
 public class ViewCheckin extends Dialog {
 
-    Activity a;
     EditText editTextViewCheckinTitle;
     TextView textViewViewCheckinLong;
     TextView textViewViewCheckinLat;
@@ -110,22 +117,13 @@ public class ViewCheckin extends Dialog {
         Button buttonViewCheckinOpenMap = findViewById(R.id.buttonViewCheckinOpenMap);
         Button buttonViewCheckinDelete = findViewById(R.id.buttonViewCheckinDelete);
         Button buttonViewCheckinShare = findViewById(R.id.buttonViewCheckinShare);
+        Button buttonViewCheckinOpenGoogleMap = findViewById(R.id.buttonViewCheckinOpenGoogleMap);
         buttonViewCheckinOpenMap.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                String location = latitude+","+longitude; // the location you want to show on the map
-                String label = "Marker Here"; // the label you want to show for the location
-                String uriBegin = "geo:" + location;
-                String query = location + "(" + label + ")";
-                String encodedQuery = Uri.encode(query);
-                String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
-                Uri uri = Uri.parse(uriString);
-                System.out.println(uriString);
-                Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                v.getContext().startActivity(mapIntent);
+                openMapDialog();
 
             }
         });
@@ -149,7 +147,6 @@ public class ViewCheckin extends Dialog {
             }
         });
 
-
         buttonViewCheckinDelete.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -164,6 +161,26 @@ public class ViewCheckin extends Dialog {
                 checkinRef.removeValue();
                 Toast.makeText(getContext(), "Checkin Deleted!", Toast.LENGTH_SHORT).show();
                 dismiss();
+
+            }
+        });
+
+        buttonViewCheckinOpenGoogleMap.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String location = latitude+","+longitude; // the location you want to show on the map
+                String label = editTextViewCheckinTitle.getText().toString().trim(); // the label you want to show for the location
+                String uriBegin = "geo:" + location;
+                String query = location + "(" + label + ")";
+                String encodedQuery = Uri.encode(query);
+                String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+                Uri uri = Uri.parse(uriString);
+                System.out.println(uriString);
+                Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                v.getContext().startActivity(mapIntent);
 
             }
         });
@@ -194,6 +211,39 @@ public class ViewCheckin extends Dialog {
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
         this.getContext().startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
+
+    private void openMapDialog() {
+
+        String label = editTextViewCheckinTitle.getText().toString().trim();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_map, null);
+        builder.setView(view);
+
+        MapView mapView = view.findViewById(R.id.mapView);
+        mapView.onCreate(null);
+        mapView.onResume();
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                googleMap.addMarker(new MarkerOptions().position(location).title(label));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14));
+            }
+        });
+
+        AlertDialog dialog = builder.show(); // store the dialog instance
+
+        Button closeButton = view.findViewById(R.id.buttonDialogMapClose);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss(); // call dismiss() on the dialog instance
+            }
+        });
+    }
+
 
     @Override
     public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, @Nullable Menu menu, int deviceId) {

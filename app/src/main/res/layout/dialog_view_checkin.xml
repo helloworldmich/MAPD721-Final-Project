@@ -252,9 +252,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Open Map"
+        android:text="View Map"
         android:textColor="@color/mainTextColor"
         app:backgroundTint="@color/mainButton" />
+
+    <Button
+        android:id="@+id/buttonViewCheckinOpenGoogleMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Open in Google Map"
+        android:textColor="@color/mainTextColor"
+        app:backgroundTint="@color/mainButton"/>
 
     <Button
         android:id="@+id/buttonViewCheckinShare"
@@ -272,6 +281,6 @@
         android:layout_weight="1"
         android:text="Delete"
         android:textColor="@color/mainTextColor"
-        app:backgroundTint="@color/mainButton" />
+        app:backgroundTint="@color/negative" />
 
 </LinearLayout>
