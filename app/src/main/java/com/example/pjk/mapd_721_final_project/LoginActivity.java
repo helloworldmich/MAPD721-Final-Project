@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 editor.apply();
                                 startActivity(new Intent(getApplicationContext(),MainScreenActivity.class));
+                                finish();
                             }
                             else
                             {

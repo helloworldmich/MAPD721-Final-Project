@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pjk.mapd_721_final_project.LoginActivity;
+import com.example.pjk.mapd_721_final_project.MainScreenActivity;
 import com.example.pjk.mapd_721_final_project.R;
 import com.example.pjk.mapd_721_final_project.dialogs.NewCheckin;
 import com.example.pjk.mapd_721_final_project.dialogs.UpdateAccount;
@@ -56,8 +58,8 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                shareContent();
-
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -75,15 +77,7 @@ public class MeFragment extends Fragment {
         return rootview;
     }
 
-    private void shareContent() {
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        String shareBody = "Check out this amazing content!";
-        String shareSubject = "Sharing my Checkin";
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, "Share using"));
-    }
+
 
     private void loadCounts()
     {

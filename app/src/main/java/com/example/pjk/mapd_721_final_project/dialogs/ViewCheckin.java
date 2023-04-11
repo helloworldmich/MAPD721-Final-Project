@@ -188,7 +188,7 @@ public class ViewCheckin extends Dialog {
         String cityCountry = textViewViewCheckinCity.getText().toString().trim() + ", " + textViewViewCheckinCountry.getText().toString().trim();
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = title + " - " + cityCountry;
+        String shareBody = "Sharing my Wanderly Checkin - " + title + " - " + cityCountry;
         String shareSubject = "Sharing my Checkin";
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
