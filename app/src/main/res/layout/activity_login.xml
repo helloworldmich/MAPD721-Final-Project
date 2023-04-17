@@ -135,6 +135,22 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textViewThridPartyLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="Social Login"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="#162AEA"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <TextView
                 android:id="@+id/textViewRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,6 +165,8 @@
                 android:textColor="#162AEA"
                 android:textSize="16sp"
                 android:textStyle="normal" />
+
+
         </LinearLayout>
 
     </LinearLayout>
