@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pjk.mapd_721_final_project.data.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
@@ -26,6 +27,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,8 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextTextLoginUsername;
     EditText editTextTextLoginPassword;
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences2;
     CheckBox checkBoxRememberMe;
     String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView textViewThridPartyLogin = findViewById(R.id.textViewThridPartyLogin);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
         // moved upper to here
         signInLauncher = registerForActivityResult(
                 new FirebaseAuthUIActivityResultContract(),
@@ -177,11 +182,44 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
+
         if (result.getResultCode() == RESULT_OK) {
 
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            // register a new user if the email not exist
+           String userEmail= user.getEmail();
+           String uid= user.getUid();
+            Log.v("mich","user.getEmail(): "+user.getEmail());
+            Log.v("mich","user.getUid(): "+user.getUid());
             Log.d("mich", user.toString()); //output: com.google.firebase.auth.internal.zzz@3ac4783
+
+            sharedPreferences2 = this.getSharedPreferences("usernameRegiterWithEmail", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences2.edit();
+            editor.putString("userEmail", userEmail);
+            editor.putString("uid", uid);
+            editor.commit();
+
+//            registerNewUserWhenLoginWithThirdParty();
+
+//            databaseReferencUser = FirebaseDatabase.getInstance().getReference("user/" + uid + "/login");
+            databaseReferencUser = FirebaseDatabase.getInstance().getReference();
+            databaseReferencUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+            registerNewUserWhenLoginWithThirdParty();
+                    }
+                }
+                @Override
+                public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+                    Log.e("TAG", "database error: " + error.getMessage());
+                    Toast.makeText(LoginActivity.this, "database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
             Toast.makeText(getApplicationContext(), "Successfully Logged In", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class); //MainScreen is the page after login
             startActivity(intent);
@@ -233,5 +271,20 @@ public class LoginActivity extends AppCompatActivity {
         if(currentUser != null){
             currentUser.reload();
         }
+    }
+
+    private void registerNewUserWhenLoginWithThirdParty(){
+        Log.d("mich", "registerNewUserWhenLoginWithThirdParty: ");
+        sharedPreferences = this.getSharedPreferences("usernameRegiterWithEmail", Context.MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", "");
+        String userID= sharedPreferences.getString("uid", "");
+        User user = new User(userEmail, "3rd-party", userEmail, userEmail);
+//        databaseReferencUser = FirebaseDatabase.getInstance().getReference("users/" + username + "/login");
+
+        databaseReferencUser = FirebaseDatabase.getInstance().getReference();
+        databaseReferencUser.child("user").child(userID).child("login").setValue(user);
+        Toast.makeText(getApplicationContext(), "You've just created an account!", Toast.LENGTH_SHORT).show();
+        Log.d("mich", userEmail);
+
     }
 }

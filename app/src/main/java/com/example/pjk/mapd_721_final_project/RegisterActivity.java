@@ -2,7 +2,9 @@ package com.example.pjk.mapd_721_final_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextRegisterPassword1;
     EditText editTextRegisterPassword2;
     EditText editTextRegisterEmail;
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,5 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 }
