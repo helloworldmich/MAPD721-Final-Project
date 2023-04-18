@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "224872432665",
+    "firebase_url": "https://mapd721-final-project-default-rtdb.firebaseio.com",
     "project_id": "mapd721-final-project",
     "storage_bucket": "mapd721-final-project.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "224872432665-sajugrphgm0joei9tnadkvf6qo4597gt.apps.googleusercontent.com",
+          "client_id": "224872432665-0qtjf4jqd3l0r736rbh38dfa7gvobglb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pjk.mapd_721_final_project",
+            "certificate_hash": "1bbd4db886c6dea786021cf4fe80813eacff0ed2"
+          }
+        },
+        {
+          "client_id": "224872432665-blkaofuifofmsk5ur5gcguek2f11qa4d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +36,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "224872432665-sajugrphgm0joei9tnadkvf6qo4597gt.apps.googleusercontent.com",
+              "client_id": "224872432665-blkaofuifofmsk5ur5gcguek2f11qa4d.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "224872432665-47en5admbdbjftfq4v35ku3l9u6udja7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ca.centennialcollege.MAPD724-Final-Project"
+              }
             }
           ]
         }
